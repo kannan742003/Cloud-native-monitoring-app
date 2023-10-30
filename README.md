@@ -1,6 +1,6 @@
-# **Cloud Native Resource Monitoring Python App on K8s!**
+# **Cloud Native Resource Monitoring Python App on Kubernetes
 
-## Things you will Learn 🤯
+## Things we will Learn 
 
 1. Python and How to create Monitoring Application in Python using Flask and psutil
 2. How to run a Python App locally.
@@ -13,11 +13,6 @@
 5. Learn Kubernetes and Create EKS cluster and Nodegroups
 6. Create Kubernetes Deployments and Services using Python!
 
-# **Youtube Video for step by step Demonstration!**
-
-[![Video Tutorial](https://img.youtube.com/vi/kBWCsHEcWnc/0.jpg)](https://youtu.be/kBWCsHEcWnc)
-
-
 ## **Prerequisites** !
 
 (Things to have before starting the projects)
@@ -28,7 +23,7 @@
 - [x]  Docker and Kubectl installed.
 - [x]  Code editor (Vscode)
 
-# ✨Let’s Start the Project ✨
+# Let’s Start the Project 
 
 ## **Part 1: Deploying the Flask application locally**
 
@@ -159,21 +154,21 @@ api_client = client.ApiClient()
 
 # Define the deployment
 deployment = client.V1Deployment(
-    metadata=client.V1ObjectMeta(name="my-flask-app"),
+    metadata=client.V1ObjectMeta(name="myflask-app"),
     spec=client.V1DeploymentSpec(
         replicas=1,
         selector=client.V1LabelSelector(
-            match_labels={"app": "my-flask-app"}
+            match_labels={"app": "myflask-app"}
         ),
         template=client.V1PodTemplateSpec(
             metadata=client.V1ObjectMeta(
-                labels={"app": "my-flask-app"}
+                labels={"app": "myflask-app"}
             ),
             spec=client.V1PodSpec(
                 containers=[
                     client.V1Container(
-                        name="my-flask-container",
-                        image="568373317874.dkr.ecr.us-east-1.amazonaws.com/my-cloud-native-repo:latest",
+                        name="myflask-container",
+                        image="568373317874.dkr.ecr.us-east-1.amazonaws.com/my-cloud-native-app:latest",
                         ports=[client.V1ContainerPort(container_port=5000)]
                     )
                 ]
@@ -191,9 +186,9 @@ api_instance.create_namespaced_deployment(
 
 # Define the service
 service = client.V1Service(
-    metadata=client.V1ObjectMeta(name="my-flask-service"),
+    metadata=client.V1ObjectMeta(name="myflask-service"),
     spec=client.V1ServiceSpec(
-        selector={"app": "my-flask-app"},
+        selector={"app": "myflask-app"},
         ports=[client.V1ServicePort(port=5000)]
     )
 )
